@@ -15,10 +15,33 @@ def predict():
     descricao = dados['descricao']  # Extrair a descrição do JSON
     
     # Fazer a previsão
-    predicao = modelo.predict([descricao])[0]
-    
+    predicaoNum = modelo.predict([descricao])[0]
+    predicaoNum = int(predicaoNum)
+    predicao = str
+    match predicaoNum:
+        case 0:
+            predicao = 'Alinhamento'
+        case 1:
+            predicao = 'Ar Condicionado'
+        case 2:
+            predicao = 'Arrefecimento'
+        case 3:
+            predicao = 'Balanceamento'
+        case 4:
+            predicao = 'Correias'
+        case 5:
+            predicao = 'Discos e Pastilhas'
+        case 6:
+            predicao = 'Embreagens'
+        case 7:
+            predicao = 'Filtros'
+        case 8:
+            predicao = 'Velas de Ignição'
+        case _:
+            predicao = 'Nenhum problema'
+
     # Retornar o resultado como JSON
-    return jsonify({'predicao': int(predicao)})
+    return jsonify({'predicao': predicao})
 
 # Página inicial para interface web (opcional)
 @app.route('/')
